@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mundial 2026</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: Arial, sans-serif; background: #2282BC; }
+
+  .header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 115px; /* altura desktop */
+    padding: 0 20px;
+    background: #2282BC;
+    color: #fff;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .header-left img {
+    max-height: 80px;
+  }
+
+  .header-left h1 {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  /* countdown horizontal */
+  .countdown {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: 900; /* números más gruesos */
+    font-size: 2rem; /* números más grandes */
+  }
+
+  .time-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .label {
+    font-size: 0.8rem;
+  }
+
+  .btn {
+    background: #F2E50E;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 18px;
+    border-radius: 8px;
+    transition: 0.3s;
+  }
+
+  .btn:hover { background: #e6d900; }
+
+  @media(max-width:900px){
+    .header-bar {
+      flex-direction: column;
+      height: auto;
+      padding: 10px;
+      gap: 10px;
+    }
+    .header-left h1 { font-size: 1.5rem; }
+    .countdown { font-size: 1.6rem; gap: 10px; }
+    .label { font-size: 0.7rem; }
+    .btn { font-size: 0.9rem; padding: 8px 14px; }
+  }
+
+  @media(max-width:600px){
+    .header-left h1 { font-size:1.3rem; }
+    .countdown { font-size: 1.4rem; }
+    .label { font-size:0.6rem; }
+    .btn { font-size: 0.8rem; padding: 6px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header-bar">
+  <div class="header-left">
+    <img src="LOGO MUNDIAL(1).png" alt="Logo Mundial 2026">
+    <h1>Mundial 2026</h1>
+  </div>
+
+  <div class="countdown">
+    <div class="time-unit"><div id="days">00</div><div class="label">días</div></div>
+    <div class="time-unit"><div id="hours">00</div><div class="label">horas</div></div>
+    <div class="time-unit"><div id="minutes">00</div><div class="label">min</div></div>
+    <div class="time-unit"><div id="seconds">00</div><div class="label">seg.</div></div>
+  </div>
+
+  <a href="https://www.eltribuno.com/ttag/mundial-2026" class="btn">
+    Seguí la Copa del Mundo
+  </a>
+</div>
+
+<script>
+  const mundialStart = new Date('June 11, 2026 16:00:00 GMT-0300');
+
+  function updateCountdown() {
+    const now = new Date();
+    const diff = mundialStart - now;
+
+    if(diff <=0){
+      document.getElementById('days').textContent='00';
+      document.getElementById('hours').textContent='00';
+      document.getElementById('minutes').textContent='00';
+      document.getElementById('seconds').textContent='00';
+      return;
+    }
+
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff / (1000*60*60)) % 24);
+    const minutes = Math.floor((diff / (1000*60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById('days').textContent=String(days).padStart(2,'0');
+    document.getElementById('hours').textContent=String(hours).padStart(2,'0');
+    document.getElementById('minutes').textContent=String(minutes).padStart(2,'0');
+    document.getElementById('seconds').textContent=String(seconds).padStart(2,'0');
+  }
+
+  setInterval(updateCountdown,1000);
+  updateCountdown();
+</script>
+
+</body>
+</html>
